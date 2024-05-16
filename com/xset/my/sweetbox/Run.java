@@ -22,6 +22,8 @@ public class Run {
         System.out.println("Total weight: " + SWEET_BOX.getTotalWeight());
         System.out.println("Total price: " + SWEET_BOX.getTotalPrice());
         System.out.println(SWEET_BOX.getTotalInfo());
+
+        test();
     }
 
     private static void test() {
@@ -33,7 +35,9 @@ public class Run {
         //System.out.println(SWEET_BOX.getTotalInfo());
 
         System.out.println("Total weight: " + SWEET_BOX.getTotalWeight());
-        double finalWeight = SWEET_BOX.smartRemoveByPrice();
+        //double finalWeight = SWEET_BOX.smartRemoveByPrice();
+        double finalWeight = SWEET_BOX.smartRemoveByWeight();
         System.out.println(finalWeight);
+        System.out.println(SWEET_BOX.getTotalInfo());
     }
 }
