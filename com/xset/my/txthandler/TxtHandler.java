@@ -1,6 +1,8 @@
 package com.xset.my.txthandler;
 
 import java.io.*;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 
 public class TxtHandler {
@@ -14,6 +16,7 @@ public class TxtHandler {
 
             Map<String, Integer> wordToCount = new HashMap<>();
             String line;
+            int wordCount = 0;
             while ((line = reader.readLine()) != null) {
 
                 String[] words = line.split("[', ]");
@@ -27,6 +30,7 @@ public class TxtHandler {
                     word = word.toLowerCase();
 
                     wordToCount.put(word, wordToCount.getOrDefault(word, 0) + 1);
+                    wordCount++;
                 }
             }
 
@@ -34,10 +38,22 @@ public class TxtHandler {
             Set<String> allWords = wordToCountTree.keySet();
             System.out.println(allWords);
             System.out.println(wordToCountTree);
+            System.out.println("\n");
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("A percentage usage for each word: ").append("\n");
+            for (Map.Entry<String, Integer> wordToCountEntry : wordToCountTree.entrySet()) {
+                String word = wordToCountEntry.getKey();
+                Integer count = wordToCountEntry.getValue();
+                double percentage = (double) count * 100 / (double) wordCount;
+                sb.append(word).append(": ").append(BigDecimal.valueOf(percentage).setScale(2, RoundingMode.HALF_UP)).append("%\n");
+            }
+
+            System.out.println(sb);
 
             int max = getMax(wordToCount);
 
-            StringBuilder sb = new StringBuilder();
+            sb = new StringBuilder();
             sb.append("Words with max usage in text: ").append("\n");
             for (Map.Entry<String, Integer> wordToCountEntry : wordToCount.entrySet()) {
                 Integer count = wordToCountEntry.getValue();
